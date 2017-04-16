@@ -2,11 +2,8 @@ const Masto = require('mastodon');
 const converter = require('unicode-playing-card-converter');
 const {StandardDeck} = require('fh-cards');
 const {Game, Hand} = require('ab-pokersolver');
-
-const japaneseHandNames = {
-	RoyalFlush: 'ロイヤルストレートフラッシュ',
-
-};
+const {stripIndents} = require('common-tags');
+const SuddenDeath = require('sudden-death');
 
 const cardToAbbr = card => {
 	if (card.value === 'O') {
@@ -32,6 +29,7 @@ const drawHandUnicode = drawHand.map(card => converter(card.toString())).join(''
 console.log(`Draw: ${drawHandUnicode} (${drawHand.map(card => card.toString()).join(', ')})`);
 
 const hand = Hand.solve(drawHand.map(card => card.suit === -1 ? 'Or' : card.toString()), 'paigowpokerhi');
+
 console.log(`Hand name: ${hand.name}`);
 console.log(`Hand description: ${hand.descr}`);
 console.log(`Hand cards: ${hand.cards.map(card => cardToAbbr(card)).join(', ')}`);
@@ -76,11 +74,27 @@ if (hand.descr === 'Wild Royal Flush' || hand.descr === 'Royal Flush') {
 	japaneseName = '???';
 }
 
-console.log(japaneseName);
+console.log(`Japanese Name: ${japaneseName}`);
 
-/*
+const screamer = new SuddenDeath(japaneseName);
+
+const text = stripIndents`
+	ドロー！
+	${drawHandUnicode}
+
+	${screamer.say()}
+
+	出来役: ${completeHandUnicode}
+`;
+
+console.log('\n' + stripIndents`
+	Text to toot
+	============
+
+	${text}
+`);
+
 masto.post('statuses', {
-	status: 'test',
+	status: text,
 	visibility: 'public',
 });
-*/
