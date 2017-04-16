@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+ab-pokersolver@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ab-pokersolver/-/ab-pokersolver-2.1.3.tgz#acf2c5b658be07dfdbc214272beb434c8ac82f9d"
+
 ajv@^4.9.1:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.11.6.tgz#947e93049790942b2a2d60a8289b28924d39f987"
@@ -32,6 +36,13 @@ aws-sign2@~0.6.0:
 aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+
+babel-runtime@^6.23.0:
+  version "6.23.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.10.0"
 
 bcrypt-pbkdf@^1.0.0:
   version "1.0.1"
@@ -66,6 +77,10 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.5.tgz#938370a57b4a51dea2c77c15d5c5fdf895164009"
   dependencies:
     delayed-stream "~1.0.0"
+
+core-js@^2.4.0:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
 cryptiles@2.x.x:
   version "2.0.5"
@@ -131,6 +146,10 @@ extract-opts@^3.3.1:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+fh-cards@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/fh-cards/-/fh-cards-1.1.1.tgz#53773449acfd0b9aed575ead1633172bb66fc8dc"
 
 forever-agent@~0.6.1:
   version "0.6.1"
@@ -273,6 +292,10 @@ qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
+regenerator-runtime@^0.10.0:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.3.tgz#8c4367a904b51ea62a908ac310bf99ff90a82a3e"
+
 request@^2.68.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
@@ -342,6 +365,10 @@ stringstream@~0.0.4:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
+tcomb@^3.2.20:
+  version "3.2.20"
+  resolved "https://registry.yarnpkg.com/tcomb/-/tcomb-3.2.20.tgz#823e689dcf3518d82c4b6c890a822aa6916692cd"
+
 tough-cookie@~2.3.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/tough-cookie/-/tough-cookie-2.3.2.tgz#f081f76e4c85720e6c37a5faced737150d84072a"
@@ -363,6 +390,13 @@ typechecker@^4.3.0:
   resolved "https://registry.yarnpkg.com/typechecker/-/typechecker-4.4.1.tgz#f97b95f51b038417212d677d45a373ee7bced7e6"
   dependencies:
     editions "^1.3.3"
+
+unicode-playing-card-converter@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/unicode-playing-card-converter/-/unicode-playing-card-converter-1.2.0.tgz#ac4afb6d81456600415d4e6cb15ef9a3f5564acf"
+  dependencies:
+    babel-runtime "^6.23.0"
+    tcomb "^3.2.20"
 
 uuid@^3.0.0:
   version "3.0.1"
