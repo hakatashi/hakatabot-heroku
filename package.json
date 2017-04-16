@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "ab-pokersolver": "^2.1.3",
+    "common-tags": "^1.4.0",
     "cson": "^4.1.0",
     "fh-cards": "^1.1.1",
     "mastodon": "^1.1.1",
