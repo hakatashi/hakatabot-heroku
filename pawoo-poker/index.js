@@ -28,6 +28,9 @@ const drawHandUnicode = drawHand.map(card => converter(card.toString())).join(''
 
 console.log(`Draw: ${drawHandUnicode} (${drawHand.map(card => card.toString()).join(', ')})`);
 
+const game = new Game('paigowpokerhi');
+game.wildStatus = 1;
+game.wheelStatus = 0;
 const hand = Hand.solve(drawHand.map(card => card.suit === -1 ? 'Or' : card.toString()), 'paigowpokerhi');
 
 console.log(`Hand name: ${hand.name}`);
@@ -51,11 +54,11 @@ let japaneseName;
 if (hand.descr === 'Wild Royal Flush' || hand.descr === 'Royal Flush') {
 	japaneseName = 'ロイヤルストレートフラッシュ';
 } else if (hand.name === 'Five of a Kind') {
-	japaneseName = 'ファイブ・オブ・ア・カインド';
+	japaneseName = 'ファイブカード';
 } else if (hand.name === 'Straight Flush') {
 	japaneseName = 'ストレートフラッシュ';
 } else if (hand.name === 'Four of a Kind' || hand.name === 'Four of a Kind with Pair or Better') {
-	japaneseName = 'フォー・オブ・ア・カインド';
+	japaneseName = 'フォーカード';
 } else if (hand.name === 'Full House') {
 	japaneseName = 'フルハウス';
 } else if (hand.name === 'Flush') {
@@ -63,7 +66,7 @@ if (hand.descr === 'Wild Royal Flush' || hand.descr === 'Royal Flush') {
 } else if (hand.name === 'Straight') {
 	japaneseName = 'ストレート';
 } else if (hand.name === 'Three of a Kind') {
-	japaneseName = 'スリー・オブ・ア・カインド';
+	japaneseName = 'スリーカード';
 } else if (hand.name === 'Two Pair') {
 	japaneseName = 'ツーペア';
 } else if (hand.name === 'Pair') {
