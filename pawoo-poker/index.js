@@ -1,9 +1,10 @@
-const Masto = require('mastodon');
 const converter = require('unicode-playing-card-converter');
 const {StandardDeck} = require('fh-cards');
 const {Game, Hand} = require('ab-pokersolver');
 const {stripIndents} = require('common-tags');
 const SuddenDeath = require('sudden-death');
+
+const pawoo = require('./pawoo.js');
 
 const cardToAbbr = card => {
 	if (card.value === 'O') {
@@ -14,11 +15,6 @@ const cardToAbbr = card => {
 		return card.toString();
 	}
 };
-
-const masto = new Masto({
-	access_token: process.env.PAWOO_POKER_TOKEN,
-	api_url: 'https://pawoo.net/api/v1/',
-});
 
 const deck = new StandardDeck(1);
 deck.shuffle();
@@ -97,7 +93,8 @@ console.log('\n' + stripIndents`
 	${text}
 `);
 
-masto.post('statuses', {
+pawoo.toot({
+	access_token: process.env.PAWOO_POKER_TOKEN,
 	status: text,
 	visibility: 'public',
 });
