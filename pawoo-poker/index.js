@@ -96,5 +96,5 @@ console.log('\n' + stripIndents`
 pawoo.toot({
 	access_token: process.env.PAWOO_POKER_TOKEN,
 	status: text,
-	visibility: 'public',
+	visibility: 'unlisted',
 });

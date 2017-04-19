@@ -37,7 +37,7 @@ describe('pawoo-poker', () => {
 				expect(status).to.have.string('ドロー！');
 				expect(status).to.have.string('人人人');
 				expect(status).to.have.string('出来役');
-				expect(visibility).to.equal('public');
+				expect(visibility).to.equal('unlisted');
 
 				delete process.env.PAWOO_POKER_TOKEN;
 				resolve();
