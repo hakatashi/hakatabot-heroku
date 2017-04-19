@@ -18,5 +18,9 @@
     "request": "^2.81.0",
     "sudden-death": "^0.1.1",
     "unicode-playing-card-converter": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "mockery": "^2.0.0"
   }
 }
