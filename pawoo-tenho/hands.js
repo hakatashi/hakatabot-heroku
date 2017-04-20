@@ -35,10 +35,10 @@ module.exports.is九種九牌 = (牌s) => {
 	return unique(included么九牌s).length >= 9;
 };
 
-module.exports.is十三不塔 = (牌s) => {
-	let 対子Count = 0;
-	let 順搭子Count = 0;
-	let 嵌搭子Count = 0;
+const count搭子 = (牌s) => {
+	let 対子 = 0;
+	let 順搭子 = 0;
+	let 嵌搭子 = 0;
 
 	const 萬子 = 牌s.filter(牌 => is萬子(牌));
 	const 索子 = 牌s.filter(牌 => is索子(牌));
@@ -50,15 +50,15 @@ module.exports.is十三不塔 = (牌s) => {
 
 		sorted同種牌.reduce((previous牌, current牌) => {
 			if (previous牌 === current牌) {
-				対子Count++;
+				対子++;
 			}
 
 			if (current牌 - previous牌 === 1) {
-				順搭子Count++;
+				順搭子++;
 			}
 
 			if (current牌 - previous牌 === 2) {
-				嵌搭子Count++;
+				嵌搭子++;
 			}
 
 			return current牌;
@@ -69,7 +69,17 @@ module.exports.is十三不塔 = (牌s) => {
 
 	assert(萬子.length + 索子.length + 筒子.length + 字牌.length === 牌s.length);
 
-	対子Count += 字牌.length - unique(字牌).length;
+	対子 += 字牌.length - unique(字牌).length;
 
-	return 対子Count === 1 && 順搭子Count === 0 && 嵌搭子Count === 0;
+	return {対子, 順搭子, 嵌搭子};
+};
+
+module.exports.is十三不塔 = (牌s) => {
+	const {対子, 順搭子, 嵌搭子} = count搭子(牌s);
+	return 対子 === 1 && 順搭子 === 0 && 嵌搭子 === 0;
+};
+
+module.exports.is十三無靠 = (牌s) => {
+	const {対子, 順搭子, 嵌搭子} = count搭子(牌s);
+	return 対子 === 0 && 順搭子 === 0 && 嵌搭子 === 0;
 };
