@@ -51,5 +51,5 @@ console.log('\n' + stripIndents`
 pawoo.toot({
 	access_token: process.env.PAWOO_TENHO_TOKEN,
 	status: text,
-	visibility: 'unlisted',
+	visibility: 'public',
 });
