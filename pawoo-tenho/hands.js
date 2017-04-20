@@ -48,21 +48,23 @@ const count搭子 = (牌s) => {
 		const 同種牌CodePoints = 同種牌.map(牌 => 牌.codePointAt(0))
 		const sorted同種牌 = 同種牌CodePoints.sort((a, b) => a - b);
 
-		sorted同種牌.reduce((previous牌, current牌) => {
-			if (previous牌 === current牌) {
-				対子++;
-			}
+		if (sorted同種牌.length !== 0) {
+			sorted同種牌.reduce((previous牌, current牌) => {
+				if (previous牌 === current牌) {
+					対子++;
+				}
 
-			if (current牌 - previous牌 === 1) {
-				順搭子++;
-			}
+				if (current牌 - previous牌 === 1) {
+					順搭子++;
+				}
 
-			if (current牌 - previous牌 === 2) {
-				嵌搭子++;
-			}
+				if (current牌 - previous牌 === 2) {
+					嵌搭子++;
+				}
 
-			return current牌;
-		});
+				return current牌;
+			});
+		}
 	});
 
 	const 字牌 = 牌s.filter(牌 => is字牌(牌));
