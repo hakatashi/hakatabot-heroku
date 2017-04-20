@@ -4,7 +4,7 @@ const shuffle = require('shuffle-array');
 
 const pawoo = require('../utils/pawoo.js');
 const calcShangten = require('./shangten.js');
-const {is九種九牌} = require('./hands.js');
+const {is九種九牌, is十三不塔, is十三無靠} = require('./hands.js');
 
 const scream = (text) => {
 	const suddenDeath = new SuddenDeath(text);
