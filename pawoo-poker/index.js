@@ -4,7 +4,7 @@ const {Game, Hand} = require('ab-pokersolver');
 const {stripIndents} = require('common-tags');
 const SuddenDeath = require('sudden-death');
 
-const pawoo = require('./pawoo.js');
+const pawoo = require('../utils/pawoo.js');
 
 const cardToAbbr = card => {
 	if (card.value === 'O') {

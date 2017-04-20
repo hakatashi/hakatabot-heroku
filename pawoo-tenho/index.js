@@ -2,7 +2,7 @@ const {stripIndents} = require('common-tags');
 const SuddenDeath = require('sudden-death');
 const shuffle = require('shuffle-array');
 
-const pawoo = require('../pawoo-poker/pawoo.js');
+const pawoo = require('../utils/pawoo.js');
 const calcShangten = require('./shangten.js');
 
 const scream = (text) => {

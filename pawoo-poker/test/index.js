@@ -6,7 +6,7 @@ describe('pawoo-poker', () => {
 	let callback = null;
 
 	before(() => {
-		mockery.registerMock('./pawoo.js', {
+		mockery.registerMock('../utils/pawoo.js', {
 			toot: (...args) => {
 				if (typeof callback === 'function') {
 					callback(...args);
