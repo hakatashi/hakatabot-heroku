@@ -13,6 +13,7 @@ describe('pawoo-tenho', () => {
 				}
 			},
 		});
+		mockery.registerMock('./shangten.js', () => 1);
 	});
 
 	beforeEach(() => {
@@ -36,6 +37,7 @@ describe('pawoo-tenho', () => {
 				expect(status).to.be.a('string');
 				expect(status).to.have.string('配牌！');
 				expect(status).to.have.string('人人人');
+				expect(status).to.have.string('一向聴');
 				expect(visibility).to.equal('unlisted');
 
 				delete process.env.PAWOO_TENHO_TOKEN;
