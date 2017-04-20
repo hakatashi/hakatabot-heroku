@@ -31,6 +31,24 @@ if (向聴Number === -1) {
 
 		${scream(scream('天和'))}
 	`;
+} else if (is十三不塔(配牌)) {
+	text = stripIndents`
+		配牌！
+		${配牌String}
+
+		ツモ！
+
+		${scream(scream('十三不塔'))}
+	`;
+} else if (is十三無靠(配牌)) {
+	text = stripIndents`
+		配牌！
+		${配牌String}
+
+		ツモ！
+
+		${scream(scream('十三無靠'))}
+	`;
 } else if (is九種九牌(配牌)) {
 	text = stripIndents`
 		配牌！
