@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:pawoo-poker",
-    "test:pawoo-poker": "mocha pawoo-poker/test"
+    "test": "npm run test:pawoo-poker && npm run test:pawoo-tenho",
+    "test:pawoo-poker": "mocha pawoo-poker/test",
+    "test:pawoo-tenho": "mocha pawoo-tenho/test"
   },
   "engines": {
     "node": "~7.7.2"
