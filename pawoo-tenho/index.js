@@ -1,29 +1,15 @@
 const {stripIndents} = require('common-tags');
 const SuddenDeath = require('sudden-death');
 const shuffle = require('shuffle-array');
-const unique = require('array-unique');
 
 const pawoo = require('../utils/pawoo.js');
 const calcShangten = require('./shangten.js');
-
-const 么九牌s = ['🀀', '🀁', '🀂', '🀃', '🀄', '🀅', '🀆', '🀇', '🀏', '🀐', '🀘', '🀙', '🀡'];
+const {is九種九牌} = require('./hands.js');
 
 const scream = (text) => {
 	const suddenDeath = new SuddenDeath(text);
 	return suddenDeath.say();
 }
-
-const is九種九牌 = (牌s) => {
-	const included么九牌s = [];
-
-	牌s.forEach((牌) => {
-		if (么九牌s.includes(牌)) {
-			included么九牌s.push(牌);
-		}
-	});
-
-	return unique(included么九牌s).length >= 9;
-};
 
 const 麻雀牌 = Array.from({length: 136}, (e, i) => (
 	String.fromCodePoint(0x1F000 + Math.floor(i / 4))

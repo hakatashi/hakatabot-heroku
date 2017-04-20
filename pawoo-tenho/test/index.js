@@ -38,7 +38,7 @@ describe('pawoo-tenho', () => {
 				expect(status).to.have.string('配牌！');
 				expect(status).to.have.string('人人人');
 				expect(status).to.have.string('一向聴');
-				expect(visibility).to.equal('unlisted');
+				expect(visibility).to.equal('public');
 
 				delete process.env.PAWOO_TENHO_TOKEN;
 				resolve();
