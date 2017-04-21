@@ -76,6 +76,7 @@ console.log('\n' + stripIndents`
 `);
 
 generateImage(配牌).then((png) => {
+	console.log(png);
 	pawoo.toot({
 		access_token: process.env.PAWOO_TENHO_TOKEN,
 		status: text,
