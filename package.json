@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "install": "wget $SHANGTEN_JS_URL -O pawoo-tenho/shangten.js",
+    "install": "wget $SHANGTEN_JS_URL -O pawoo-tenho/shangten.js && git submodule init && git submodule update",
     "test": "npm run test:pawoo-poker && npm run test:pawoo-tenho",
     "test:pawoo-poker": "mocha pawoo-poker/test",
     "test:pawoo-tenho": "mocha pawoo-tenho/test"
