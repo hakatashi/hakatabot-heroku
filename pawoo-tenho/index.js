@@ -5,6 +5,7 @@ const shuffle = require('shuffle-array');
 const pawoo = require('../utils/pawoo.js');
 const calcShangten = require('./shangten.js');
 const {is九種九牌, is十三不塔, is十三無靠} = require('./hands.js');
+const generateImage = require('./generateImage.js');
 
 const scream = (text) => {
 	const suddenDeath = new SuddenDeath(text);
@@ -74,8 +75,11 @@ console.log('\n' + stripIndents`
 	${text}
 `);
 
-pawoo.toot({
-	access_token: process.env.PAWOO_TENHO_TOKEN,
-	status: text,
-	visibility: 'public',
+generateImage(配牌).then((png) => {
+	pawoo.toot({
+		access_token: process.env.PAWOO_TENHO_TOKEN,
+		status: text,
+		visibility: 'public',
+		file: png,
+	});
 });

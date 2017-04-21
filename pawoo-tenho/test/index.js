@@ -28,16 +28,19 @@ describe('pawoo-tenho', () => {
 		mockery.disable();
 	});
 
-	it('toots something', () => {
+	it('toots something', function () {
+		this.timeout(10000);
+
 		process.env.PAWOO_TENHO_TOKEN = 'pawoo-tenho-token';
 
 		const promise = new Promise((resolve) => {
-			callback = ({access_token, status, visibility}) => {
+			callback = ({access_token, status, visibility, file}) => {
 				expect(access_token).to.equal('pawoo-tenho-token');
 				expect(status).to.be.a('string');
 				expect(status).to.have.string('配牌！');
 				expect(status).to.have.string('人人人');
 				expect(status).to.have.string('一向聴');
+				expect(Buffer.isBuffer(file)).to.be.true;
 				expect(visibility).to.equal('public');
 
 				delete process.env.PAWOO_TENHO_TOKEN;

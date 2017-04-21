@@ -6,7 +6,7 @@ const svg2png = require('svg2png');
 const fs = require('fs');
 
 const imageWidth = 900;
-const imageHeight = 150;
+const imageHeight = 250;
 const paiSize = 60;
 const printSize = 0.85;
 
