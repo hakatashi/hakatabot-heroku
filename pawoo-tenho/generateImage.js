@@ -32,16 +32,13 @@ const fixHref = (node) => {
 };
 
 module.exports = async (牌s) => {
-	console.log('B', 牌s);
 	const unique牌s = unique(牌s);
-	console.log('C', unique牌s);
 
 	const 牌Images = await Promise.all(
 		[...unique牌s, 'Front'].map((牌) => (
 			datauri(`${__dirname}/riichi-mahjong-tiles/Export/Regular/${牌ToFileName(牌)}.png`).then(uri => [牌, uri])
 		))
 	);
-	console.log('D');
 
 	const 牌ImageMap = new Map(牌Images);
 
@@ -54,14 +51,12 @@ module.exports = async (牌s) => {
 			}
 		});
 	});
-	console.log('E');
 
 	const {Snap, document} = window;
 
 	const paper = Snap(imageWidth, imageHeight);
 	const imageOffsetX = (imageWidth - paiSize * 14.5) / 2;
 	const imageOffsetY = (imageHeight - paiSize / 3 * 4) / 2;
-	console.log('F');
 
 	牌s.forEach((牌, index) => {
 		const x = (index === 13 ? index + 0.5 : index) * paiSize + imageOffsetX;
@@ -78,7 +73,6 @@ module.exports = async (牌s) => {
 			image.transform(Snap.matrix().rotate(180, x + paiSize / 2, imageOffsetY + paiSize / 3 * 2));
 		}
 	});
-	console.log('G');
 
 	const license = paper.text(imageWidth - 10, imageHeight - 10, 'Images of Mahjong Tiles by FluffyStuff licensed under CC BY 4.0');
 	license.attr({
@@ -87,14 +81,11 @@ module.exports = async (牌s) => {
 		fontSize: '12px',
 		fontFamily: 'sans-serif',
 	});
-	console.log('H');
 
 	const svg = xmlserializer.serializeToString(paper.node);
 	window.close();
-	console.log('I');
 
 	const png = await svg2png(svg);
-	console.log('J');
 
 	return png;
 };
