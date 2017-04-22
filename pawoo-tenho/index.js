@@ -79,7 +79,7 @@ generateImage(配牌).then((png) => {
 	pawoo.toot({
 		access_token: process.env.PAWOO_TENHO_TOKEN,
 		status: text,
-		visibility: 'public',
+		visibility: 'unlisted',
 		file: png,
 	});
 });
