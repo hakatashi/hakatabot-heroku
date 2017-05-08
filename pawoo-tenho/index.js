@@ -7,7 +7,7 @@ const calcShangten = require('./shangten.js');
 const {is九種九牌, is十三不塔, is十三無靠} = require('./hands.js');
 const generateImage = require('./generateImage.js');
 
-(async () => {
+module.exports = (async () => {
 	const scream = (text) => {
 		const suddenDeath = new SuddenDeath(text);
 		return suddenDeath.say();

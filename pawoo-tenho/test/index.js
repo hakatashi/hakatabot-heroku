@@ -7,9 +7,9 @@ describe('pawoo-tenho', () => {
 
 	before(() => {
 		mockery.registerMock('../utils/pawoo.js', {
-			toot: (...args) => {
+			toot: async (...args) => {
 				if (typeof callback === 'function') {
-					callback(...args);
+					return callback(...args);
 				}
 			},
 		});
@@ -28,28 +28,56 @@ describe('pawoo-tenho', () => {
 		mockery.disable();
 	});
 
-	it('toots something', function () {
+	it('toots something', async function () {
 		this.timeout(10000);
 
 		process.env.PAWOO_TENHO_TOKEN = 'pawoo-tenho-token';
 
-		const promise = new Promise((resolve) => {
+		const promise = new Promise((resolve, reject) => {
 			callback = ({access_token, status, visibility, file}) => {
-				expect(access_token).to.equal('pawoo-tenho-token');
-				expect(status).to.be.a('string');
-				expect(status).to.have.string('配牌！');
-				expect(status).to.have.string('人人人');
-				expect(status).to.have.string('一向聴');
-				expect(Buffer.isBuffer(file)).to.be.true;
-				expect(visibility).to.equal('unlisted');
+				try {
+					expect(access_token).to.equal('pawoo-tenho-token');
+					expect(status).to.be.a('string');
+					expect(status).to.have.string('配牌！');
+					expect(status).to.have.string('人人人');
+					expect(status).to.have.string('一向聴');
+					expect(Buffer.isBuffer(file)).to.be.true;
+					expect(visibility).to.equal('unlisted');
+					resolve();
+				} catch (error) {
+					reject(error);
+				}
 
-				delete process.env.PAWOO_TENHO_TOKEN;
-				resolve();
+				return {data: {url: 'https://pawoo.net/@tenho/114514'}};
 			};
 		});
 
-		require('../index.js');
+		const program = require('../index.js');
 
-		return promise;
+		await promise;
+
+		const promise2 = new Promise((resolve, reject) => {
+			callback = ({access_token, status, visibility}) => {
+				try {
+					expect(access_token).to.equal('pawoo-tenho-token');
+					expect(status).to.be.a('string');
+					expect(status).to.have.string('@hakatashi');
+					expect(status).to.have.string('配牌！');
+					expect(status).to.have.string('人人人');
+					expect(status).to.have.string('一向聴');
+					expect(status).to.have.string('https://pawoo.net/@tenho/114514');
+					expect(visibility).to.equal('direct');
+					resolve();
+				} catch (error) {
+					reject(error);
+				}
+
+				return {data: {url: 'https://pawoo.net/@tenho/114514'}};
+			};
+		});
+
+		await promise2;
+
+		await program;
 	});
 });
