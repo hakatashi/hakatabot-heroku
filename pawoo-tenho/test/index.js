@@ -33,7 +33,9 @@ describe('pawoo-tenho', () => {
 
 		process.env.PAWOO_TENHO_TOKEN = 'pawoo-tenho-token';
 
-		const promise = new Promise((resolve, reject) => {
+		const program = require('../index.js');
+
+		await new Promise((resolve, reject) => {
 			callback = ({access_token, status, visibility, file}) => {
 				try {
 					expect(access_token).to.equal('pawoo-tenho-token');
@@ -52,11 +54,7 @@ describe('pawoo-tenho', () => {
 			};
 		});
 
-		const program = require('../index.js');
-
-		await promise;
-
-		const promise2 = new Promise((resolve, reject) => {
+		await new Promise((resolve, reject) => {
 			callback = ({access_token, status, visibility}) => {
 				try {
 					expect(access_token).to.equal('pawoo-tenho-token');
@@ -75,8 +73,6 @@ describe('pawoo-tenho', () => {
 				return {data: {url: 'https://pawoo.net/@tenho/114514'}};
 			};
 		});
-
-		await promise2;
 
 		await program;
 	});

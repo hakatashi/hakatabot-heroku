@@ -8,6 +8,8 @@ const {is九種九牌, is十三不塔, is十三無靠} = require('./hands.js');
 const generateImage = require('./generateImage.js');
 
 module.exports = (async () => {
+	await new Promise(process.nextTick);
+
 	const scream = (text) => {
 		const suddenDeath = new SuddenDeath(text);
 		return suddenDeath.say();
