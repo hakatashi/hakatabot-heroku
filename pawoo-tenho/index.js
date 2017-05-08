@@ -23,6 +23,7 @@ const generateImage = require('./generateImage.js');
 	const 配牌String = `${配牌.slice(0, 13).join('')} ${配牌[13]}`;
 
 	let text;
+	let notification = false;
 
 	if (向聴Number === -1) {
 		text = stripIndents`
@@ -33,6 +34,7 @@ const generateImage = require('./generateImage.js');
 
 			${scream(scream('天和'))}
 		`;
+		notification = true;
 	} else if (is十三不塔(配牌)) {
 		text = stripIndents`
 			配牌！
@@ -42,6 +44,7 @@ const generateImage = require('./generateImage.js');
 
 			${scream(scream('十三不塔'))}
 		`;
+		notification = true;
 	} else if (is十三無靠(配牌)) {
 		text = stripIndents`
 			配牌！
@@ -51,6 +54,7 @@ const generateImage = require('./generateImage.js');
 
 			${scream(scream('十三無靠'))}
 		`;
+		notification = true;
 	} else if (is九種九牌(配牌)) {
 		text = stripIndents`
 			配牌！
@@ -58,6 +62,7 @@ const generateImage = require('./generateImage.js');
 
 			${scream('九種九牌')}
 		`;
+		notification = true;
 	} else {
 		const 向聴String = ['聴牌', '一向聴', '二向聴', '三向聴', '四向聴', '五向聴', '六向聴'][向聴Number];
 
@@ -67,6 +72,10 @@ const generateImage = require('./generateImage.js');
 
 			${scream(向聴String)}
 		`;
+
+		if (向聴Number === 0 || 向聴Number === 1) {
+			notification = true;
+		}
 	}
 
 	console.log('\n' + stripIndents`
@@ -76,12 +85,25 @@ const generateImage = require('./generateImage.js');
 		${text}
 	`);
 
-	generateImage(配牌).then((png) => {
-		pawoo.toot({
-			access_token: process.env.PAWOO_TENHO_TOKEN,
-			status: text,
-			visibility: 'unlisted',
-			file: png,
-		});
+	const png = await generateImage(配牌);
+
+	const {data: status} = await pawoo.toot({
+		access_token: process.env.PAWOO_TENHO_TOKEN,
+		status: text,
+		visibility: 'unlisted',
+		file: png,
 	});
+
+	if (notification) {
+		await pawoo.toot({
+			access_token: process.env.PAWOO_TENHO_TOKEN,
+			status: stripIndents`
+				@hakatashi
+				${text}
+
+				${status.url}
+			`,
+			visibility: 'direct',
+		})
+	}
 })();
