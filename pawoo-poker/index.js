@@ -7,6 +7,8 @@ const SuddenDeath = require('sudden-death');
 const pawoo = require('../utils/pawoo.js');
 
 module.exports = (async () => {
+	await new Promise(process.nextTick);
+
 	const cardToAbbr = card => {
 		if (card.value === 'O') {
 			return 'X';
@@ -94,7 +96,7 @@ module.exports = (async () => {
 		${text}
 	`);
 
-	pawoo.toot({
+	await pawoo.toot({
 		access_token: process.env.PAWOO_POKER_TOKEN,
 		status: text,
 		visibility: 'unlisted',

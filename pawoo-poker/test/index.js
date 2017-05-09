@@ -27,10 +27,12 @@ describe('pawoo-poker', () => {
 		mockery.disable();
 	});
 
-	it('toots something', () => {
+	it('toots something', async () => {
 		process.env.PAWOO_POKER_TOKEN = 'hoge';
 
-		const promise = new Promise((resolve) => {
+		require('../index.js');
+
+		await new Promise((resolve) => {
 			callback = ({access_token, status, visibility}) => {
 				expect(access_token).to.equal('hoge');
 				expect(status).to.be.a('string');
@@ -43,9 +45,5 @@ describe('pawoo-poker', () => {
 				resolve();
 			};
 		});
-
-		require('../index.js');
-
-		return promise;
 	});
 });
