@@ -49,13 +49,17 @@ module.exports = (async () => {
 	console.log(`Complete Hand: ${completeHandUnicode}`);
 
 	let japaneseName;
+	let notification = false;
 
 	if (hand.descr === 'Wild Royal Flush' || hand.descr === 'Royal Flush') {
 		japaneseName = 'ロイヤルストレートフラッシュ';
+		notification = true;
 	} else if (hand.name === 'Five of a Kind') {
 		japaneseName = 'ファイブカード';
+		notification = true;
 	} else if (hand.name === 'Straight Flush') {
 		japaneseName = 'ストレートフラッシュ';
+		notification = true;
 	} else if (hand.name === 'Four of a Kind' || hand.name === 'Four of a Kind with Pair or Better') {
 		japaneseName = 'フォーカード';
 	} else if (hand.name === 'Full House') {
@@ -74,6 +78,7 @@ module.exports = (async () => {
 		japaneseName = 'ノーペア';
 	} else {
 		japaneseName = '???';
+		notification = true;
 	}
 
 	console.log(`Japanese Name: ${japaneseName}`);
@@ -96,9 +101,22 @@ module.exports = (async () => {
 		${text}
 	`);
 
-	await pawoo.toot({
+	const {data: status} = await pawoo.toot({
 		access_token: process.env.PAWOO_POKER_TOKEN,
 		status: text,
 		visibility: 'unlisted',
 	});
+
+	if (notification) {
+		await pawoo.toot({
+			access_token: process.env.PAWOO_POKER_TOKEN,
+			status: stripIndents`
+				@hakatashi
+				${text}
+
+				${status.url}
+			`,
+			visibility: 'direct',
+		});
+	}
 })();

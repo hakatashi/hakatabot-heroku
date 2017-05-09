@@ -7,9 +7,17 @@ describe('pawoo-poker', () => {
 
 	before(() => {
 		mockery.registerMock('../utils/pawoo.js', {
-			toot: (...args) => {
+			toot: async (...args) => {
 				if (typeof callback === 'function') {
-					callback(...args);
+					return callback(...args);
+				}
+			},
+		});
+		mockery.registerMock('fh-cards', {
+			StandardDeck: class StandardDeck {
+				shuffle() {}
+				draws() {
+					return ['As', 'Ks', 'Qs', 'Js', 'Ts', '9s', '8s'];
 				}
 			},
 		});
@@ -32,17 +40,43 @@ describe('pawoo-poker', () => {
 
 		require('../index.js');
 
-		await new Promise((resolve) => {
+		await new Promise((resolve, reject) => {
 			callback = ({access_token, status, visibility}) => {
-				expect(access_token).to.equal('hoge');
-				expect(status).to.be.a('string');
-				expect(status).to.have.string('ドロー！');
-				expect(status).to.have.string('人人人');
-				expect(status).to.have.string('出来役');
-				expect(visibility).to.equal('unlisted');
+				try {
+					expect(access_token).to.equal('hoge');
+					expect(status).to.be.a('string');
+					expect(status).to.have.string('ドロー！');
+					expect(status).to.have.string('人人人');
+					expect(status).to.have.string('ロイヤルストレートフラッシュ');
+					expect(status).to.have.string('出来役');
+					expect(visibility).to.equal('unlisted');
+					resolve();
+				} catch (error) {
+					reject(error);
+				}
 
-				delete process.env.PAWOO_POKER_TOKEN;
-				resolve();
+				return {data: {url: 'https://pawoo.net/@poker/114514'}};
+			};
+		});
+
+		await new Promise((resolve, reject) => {
+			callback = ({access_token, status, visibility}) => {
+				try {
+					expect(access_token).to.equal('hoge');
+					expect(status).to.be.a('string');
+					expect(status).to.have.string('@hakatashi');
+					expect(status).to.have.string('ドロー！');
+					expect(status).to.have.string('人人人');
+					expect(status).to.have.string('ロイヤルストレートフラッシュ');
+					expect(status).to.have.string('出来役');
+					expect(status).to.have.string('https://pawoo.net/@poker/114514');
+					expect(visibility).to.equal('direct');
+					resolve();
+				} catch (error) {
+					reject(error);
+				}
+
+				return {data: {url: 'https://pawoo.net/@poker/114514'}};
 			};
 		});
 	});
