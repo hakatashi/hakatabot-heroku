@@ -75,7 +75,7 @@ module.exports = (async () => {
 			${scream(向聴String)}
 		`;
 
-		if (向聴Number === 0 || 向聴Number === 1) {
+		if (向聴Number === 0) {
 			notification = true;
 		}
 	}
