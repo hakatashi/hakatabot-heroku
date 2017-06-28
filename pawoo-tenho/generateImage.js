@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const imageWidth = 900;
 const imageHeight = 250;
-const paiSize = 60;
+const 牌Size = 60;
 const printSize = 0.85;
 
 const fileNames = [
@@ -55,22 +55,22 @@ module.exports = async (牌s) => {
 	const {Snap, document} = window;
 
 	const paper = Snap(imageWidth, imageHeight);
-	const imageOffsetX = (imageWidth - paiSize * 14.5) / 2;
-	const imageOffsetY = (imageHeight - paiSize / 3 * 4) / 2;
+	const imageOffsetX = (imageWidth - 牌Size * 14.5) / 2;
+	const imageOffsetY = (imageHeight - 牌Size / 3 * 4) / 2;
 
 	牌s.forEach((牌, index) => {
-		const x = (index === 13 ? index + 0.5 : index) * paiSize + imageOffsetX;
+		const x = (index === 13 ? index + 0.5 : index) * 牌Size + imageOffsetX;
 
-		const frontImage = paper.image(牌ImageMap.get('Front'), x, imageOffsetY, paiSize, paiSize / 3 * 4);
+		const frontImage = paper.image(牌ImageMap.get('Front'), x, imageOffsetY, 牌Size, 牌Size / 3 * 4);
 		fixHref(frontImage.node)
 
-		const offsetX = paiSize * ((1 - printSize) / 2);
-		const offsetY = paiSize / 3 * 4 * ((1 - printSize) / 2);
-		const image = paper.image(牌ImageMap.get(牌), x + offsetX, imageOffsetY + offsetY, paiSize * printSize, paiSize / 3 * 4 * printSize);
+		const offsetX = 牌Size * ((1 - printSize) / 2);
+		const offsetY = 牌Size / 3 * 4 * ((1 - printSize) / 2);
+		const image = paper.image(牌ImageMap.get(牌), x + offsetX, imageOffsetY + offsetY, 牌Size * printSize, 牌Size / 3 * 4 * printSize);
 		fixHref(image.node)
 
 		if (Math.random() < 0.5) {
-			image.transform(Snap.matrix().rotate(180, x + paiSize / 2, imageOffsetY + paiSize / 3 * 2));
+			image.transform(Snap.matrix().rotate(180, x + 牌Size / 2, imageOffsetY + 牌Size / 3 * 2));
 		}
 	});
 
