@@ -1,4 +1,4 @@
-const jsdom = require('jsdom');
+const jsdom = require('jsdom/lib/old-api');
 const {promise: datauri} = require('datauri');
 const xmlserializer = require('xmlserializer');
 const unique = require('array-unique').immutable;
