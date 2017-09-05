@@ -48,27 +48,28 @@ describe('pawoo-tenho', () => {
 					resolve();
 				} catch (error) {
 					reject(error);
+					return;
 				}
 
-				return {data: {url: 'https://pawoo.net/@tenho/114514'}};
-			};
-		});
+				callback = ({access_token, status, visibility}) => {
+					try {
+						expect(access_token).to.equal('pawoo-tenho-token');
+						expect(status).to.be.a('string');
+						expect(status).to.have.string('@hakatashi');
+						expect(status).to.have.string('配牌！');
+						expect(status).to.have.string('人人人');
+						expect(status).to.have.string('一向聴');
+						expect(status).to.have.string('https://pawoo.net/@tenho/114514');
+						expect(visibility).to.equal('direct');
+					} catch (error) {
+						reject(error);
+						return;
+					}
 
-		await new Promise((resolve, reject) => {
-			callback = ({access_token, status, visibility}) => {
-				try {
-					expect(access_token).to.equal('pawoo-tenho-token');
-					expect(status).to.be.a('string');
-					expect(status).to.have.string('@hakatashi');
-					expect(status).to.have.string('配牌！');
-					expect(status).to.have.string('人人人');
-					expect(status).to.have.string('一向聴');
-					expect(status).to.have.string('https://pawoo.net/@tenho/114514');
-					expect(visibility).to.equal('direct');
 					resolve();
-				} catch (error) {
-					reject(error);
-				}
+
+					return {data: {url: 'https://pawoo.net/@tenho/114514'}};
+				};
 
 				return {data: {url: 'https://pawoo.net/@tenho/114514'}};
 			};

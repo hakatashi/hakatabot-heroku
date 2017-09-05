@@ -4,13 +4,13 @@
   "main": "index.js",
   "scripts": {
     "install": "wget $SHANGTEN_JS_URL -O pawoo-tenho/shangten.js",
-    "pawoo-tenho": "rm -rf node_modules/phantomjs-prebuilt && yarn install && node pawoo-tenho/index.js",
+    "pawoo-tenho": "node pawoo-tenho/index.js",
     "test": "npm run test:pawoo-poker && npm run test:pawoo-tenho",
     "test:pawoo-poker": "mocha pawoo-poker/test",
     "test:pawoo-tenho": "mocha pawoo-tenho/test"
   },
   "engines": {
-    "node": "~7.7.2"
+    "node": "~8.4.0"
   },
   "repository": "https://github.com/hakatashi/hakatabot-heroku.git",
   "author": "Koki Takahashi <hakatasiloving@gmail.com>",
@@ -34,7 +34,7 @@
     "xmlserializer": "^0.6.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.0.0",
     "mocha": "^3.2.0",
     "mockery": "^2.0.0"
   }

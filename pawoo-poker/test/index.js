@@ -50,31 +50,31 @@ describe('pawoo-poker', () => {
 					expect(status).to.have.string('ロイヤルストレートフラッシュ');
 					expect(status).to.have.string('出来役');
 					expect(visibility).to.equal('unlisted');
-					resolve();
 				} catch (error) {
 					reject(error);
+					return;
 				}
 
-				return {data: {url: 'https://pawoo.net/@poker/114514'}};
-			};
-		});
+				callback = ({access_token, status, visibility}) => {
+					try {
+						expect(access_token).to.equal('hoge');
+						expect(status).to.be.a('string');
+						expect(status).to.have.string('@hakatashi');
+						expect(status).to.have.string('ドロー！');
+						expect(status).to.have.string('人人人');
+						expect(status).to.have.string('ロイヤルストレートフラッシュ');
+						expect(status).to.have.string('出来役');
+						expect(status).to.have.string('https://pawoo.net/@poker/114514');
+						expect(visibility).to.equal('direct');
+					} catch (error) {
+						reject(error);
+						return;
+					}
 
-		await new Promise((resolve, reject) => {
-			callback = ({access_token, status, visibility}) => {
-				try {
-					expect(access_token).to.equal('hoge');
-					expect(status).to.be.a('string');
-					expect(status).to.have.string('@hakatashi');
-					expect(status).to.have.string('ドロー！');
-					expect(status).to.have.string('人人人');
-					expect(status).to.have.string('ロイヤルストレートフラッシュ');
-					expect(status).to.have.string('出来役');
-					expect(status).to.have.string('https://pawoo.net/@poker/114514');
-					expect(visibility).to.equal('direct');
 					resolve();
-				} catch (error) {
-					reject(error);
-				}
+
+					return {data: {url: 'https://pawoo.net/@poker/114514'}};
+				};
 
 				return {data: {url: 'https://pawoo.net/@poker/114514'}};
 			};
