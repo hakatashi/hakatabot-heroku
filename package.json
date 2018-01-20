@@ -10,7 +10,7 @@
     "test:pawoo-tenho": "mocha pawoo-tenho/test"
   },
   "engines": {
-    "node": "~8.4.0"
+    "node": "^9.4.0"
   },
   "repository": "https://github.com/hakatashi/hakatabot-heroku.git",
   "author": "Koki Takahashi <hakatasiloving@gmail.com>",
