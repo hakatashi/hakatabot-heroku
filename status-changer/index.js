@@ -23,7 +23,7 @@ module.exports = (async () => {
 
 		await slack.users.profile.set({
 			profile: JSON.stringify({
-				status_text: sample(tweets),
+				status_text: sample(tweets).replace(/\n/g, '　'),
 				status_emoji: `:${sample(totalEmojis)}:`,
 			}),
 		});
