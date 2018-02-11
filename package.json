@@ -5,9 +5,10 @@
   "scripts": {
     "install": "wget $SHANGTEN_JS_URL -O pawoo-tenho/shangten.js",
     "pawoo-tenho": "node pawoo-tenho/index.js",
-    "test": "npm run test:pawoo-poker && npm run test:pawoo-tenho",
+    "test": "npm run test:pawoo-poker && npm run test:pawoo-tenho && npm run test:status-changer",
     "test:pawoo-poker": "mocha pawoo-poker/test",
-    "test:pawoo-tenho": "mocha pawoo-tenho/test"
+    "test:pawoo-tenho": "mocha pawoo-tenho/test",
+    "test:status-changer": "mocha status-changer/test"
   },
   "engines": {
     "node": "^9.4.0"

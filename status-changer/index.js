@@ -1,13 +1,17 @@
-require('dotenv').config();
-
+const dotenv = require('dotenv');
 const download = require('download');
 const {WebClient} = require('@slack/client');
 const emojiData = require('emoji-data');
 const sample = require('lodash/sample');
 
+if (require.main === module) {
+	dotenv.config();
+}
+
 const slackTokens = process.env.SLACK_TOKENS.split(':');
 
 module.exports = (async () => {
+	// For test
 	await new Promise(process.nextTick);
 
 	const tweetsBuffer = await download(process.env.TWEETS_URL);

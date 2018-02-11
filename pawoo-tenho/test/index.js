@@ -29,7 +29,7 @@ describe('pawoo-tenho', () => {
 	});
 
 	it('toots something', async function () {
-		this.timeout(10000);
+		this.timeout(30000);
 
 		process.env.PAWOO_TENHO_TOKEN = 'pawoo-tenho-token';
 
