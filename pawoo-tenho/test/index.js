@@ -12,11 +12,7 @@ describe('pawoo-tenho', () => {
 
 	before(() => {
 		mockery.registerMock('../utils/pawoo.js', {
-			toot: (...args) => (
-				typeof callback === 'function'
-					? callback(...args)
-					: undefined
-			),
+			toot: (...args) => typeof callback === 'function' ? callback(...args) : undefined,
 		});
 		mockery.registerMock('./shangten.js', () => 0);
 	});

@@ -110,8 +110,7 @@ module.exports = (async () => {
 	`;
 
 	console.log(
-		`\n${
-			stripIndents`
+		`\n${stripIndents`
 		Text to toot
 		============
 

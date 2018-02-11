@@ -17,7 +17,10 @@ describe('status-changer', () => {
 					const handler = {
 						get: (name, property) => {
 							if (typeof callback === 'function') {
-								return new Proxy((...args) => callback(property, ...args), handler);
+								return new Proxy(
+									(...args) => callback(property, ...args),
+									handler
+								);
 							}
 							return new Proxy({}, handler);
 						},
