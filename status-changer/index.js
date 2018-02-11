@@ -18,14 +18,22 @@ module.exports = (async () => {
 	for (const slackToken of slackTokens) {
 		const slack = new WebClient(slackToken);
 
+		const {team} = await slack.team.info();
+		console.log(`Updating status for team ${team.name}...`);
+
 		const {emoji: customEmojis} = await slack.emoji.list();
 		const totalEmojis = [...emojis.map((e) => e.short_name), ...Object.keys(customEmojis)];
 
+		const statusText = sample(tweets).replace(/\n/g, '　');
+		const statusEmoji = `:${sample(totalEmojis)}:`;
+
 		await slack.users.profile.set({
 			profile: JSON.stringify({
-				status_text: sample(tweets).replace(/\n/g, '　'),
-				status_emoji: `:${sample(totalEmojis)}:`,
+				status_text: statusText,
+				status_emoji: statusEmoji,
 			}),
 		});
+
+		console.log(`New status: ${statusEmoji} ${statusText}`);
 	}
 })();
