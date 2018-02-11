@@ -17,12 +17,10 @@ describe('status-changer', () => {
 					const handler = {
 						get: (name, property) => {
 							if (typeof callback === 'function') {
-								return new Proxy((...args) => {
-									return callback(property, ...args);
-								}, handler);
+								return new Proxy((...args) => callback(property, ...args), handler);
 							}
 							return new Proxy({}, handler);
-						}
+						},
 					};
 					return new Proxy({}, handler);
 				}
@@ -30,10 +28,7 @@ describe('status-changer', () => {
 		});
 		mockery.registerMock('download', async () => JSON.stringify(['tweet1', 'tweet2', 'tweet3']));
 		mockery.registerMock('emoji-data', {
-			all: () => [
-				{short_name: 'emoji1'},
-				{short_name: 'emoji2'},
-			],
+			all: () => [{short_name: 'emoji1'}, {short_name: 'emoji2'}],
 		});
 	});
 
@@ -49,10 +44,10 @@ describe('status-changer', () => {
 		mockery.disable();
 	});
 
-	it('toots something', async function () {
+	it('toots something', async function() {
 		this.timeout(10000);
-		
-		process.env.SLACK_TOKENS = 'TOKEN'
+
+		process.env.SLACK_TOKENS = 'TOKEN';
 
 		const program = require('../index.js');
 
@@ -84,8 +79,12 @@ describe('status-changer', () => {
 					try {
 						expect(data).to.have.own.property('profile');
 						const profile = JSON.parse(data.profile);
-						
-						expect(profile.status_text).to.be.oneOf(['tweet1', 'tweet2', 'tweet3']);
+
+						expect(profile.status_text).to.be.oneOf([
+							'tweet1',
+							'tweet2',
+							'tweet3',
+						]);
 						expect(profile.status_emoji).to.be.oneOf([
 							':emoji1:',
 							':emoji2:',

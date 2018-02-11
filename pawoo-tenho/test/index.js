@@ -28,7 +28,7 @@ describe('pawoo-tenho', () => {
 		mockery.disable();
 	});
 
-	it('toots something', async function () {
+	it('toots something', async function() {
 		this.timeout(30000);
 
 		process.env.PAWOO_TENHO_TOKEN = 'pawoo-tenho-token';

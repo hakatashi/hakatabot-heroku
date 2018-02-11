@@ -9,42 +9,54 @@ const pawoo = require('../utils/pawoo.js');
 module.exports = (async () => {
 	await new Promise(process.nextTick);
 
-	const cardToAbbr = card => {
+	const cardToAbbr = (card) => {
 		if (card.value === 'O') {
 			return 'X';
 		} else if (card.rank === 9) {
 			return `T${card.suit}`;
-		} else {
-			return card.toString();
 		}
+		return card.toString();
 	};
 
 	const deck = new StandardDeck(1);
 	deck.shuffle();
 
 	const drawHand = deck.draws(7);
-	const drawHandUnicode = drawHand.map(card => converter(card.toString())).join('');
+	const drawHandUnicode = drawHand
+		.map((card) => converter(card.toString()))
+		.join('');
 
-	console.log(`Draw: ${drawHandUnicode} (${drawHand.map(card => card.toString()).join(', ')})`);
+	console.log(
+		`Draw: ${drawHandUnicode} (${drawHand
+			.map((card) => card.toString())
+			.join(', ')})`
+	);
 
 	const game = new Game('paigowpokerhi');
 	game.wildStatus = 1;
 	game.wheelStatus = 0;
-	const hand = Hand.solve(drawHand.map(card => card.suit === -1 ? 'Or' : card.toString()), 'paigowpokerhi');
+	const hand = Hand.solve(
+		drawHand.map((card) => (card.suit === -1 ? 'Or' : card.toString())),
+		'paigowpokerhi'
+	);
 
 	console.log(`Hand name: ${hand.name}`);
 	console.log(`Hand description: ${hand.descr}`);
-	console.log(`Hand cards: ${hand.cards.map(card => cardToAbbr(card)).join(', ')}`);
+	console.log(
+		`Hand cards: ${hand.cards.map((card) => cardToAbbr(card)).join(', ')}`
+	);
 
-	const completeHand = hand.cards.map(card => cardToAbbr(card));
+	const completeHand = hand.cards.map((card) => cardToAbbr(card));
 
-	hand.cardPool.forEach(card => {
+	for (const card of hand.cardPool) {
 		if (completeHand.length < 5 && !completeHand.includes(cardToAbbr(card))) {
 			completeHand.push(cardToAbbr(card));
 		}
-	});
+	}
 
-	const completeHandUnicode = completeHand.map(card => converter(card)).join('');
+	const completeHandUnicode = completeHand
+		.map((card) => converter(card))
+		.join('');
 
 	console.log(`Complete Hand: ${completeHandUnicode}`);
 
@@ -60,7 +72,10 @@ module.exports = (async () => {
 	} else if (hand.name === 'Straight Flush') {
 		japaneseName = 'ストレートフラッシュ';
 		notification = true;
-	} else if (hand.name === 'Four of a Kind' || hand.name === 'Four of a Kind with Pair or Better') {
+	} else if (
+		hand.name === 'Four of a Kind' ||
+		hand.name === 'Four of a Kind with Pair or Better'
+	) {
 		japaneseName = 'フォーカード';
 	} else if (hand.name === 'Full House') {
 		japaneseName = 'フルハウス';
@@ -94,12 +109,15 @@ module.exports = (async () => {
 		出来役: ${completeHandUnicode}
 	`;
 
-	console.log('\n' + stripIndents`
+	console.log(
+		`\n${
+			stripIndents`
 		Text to toot
 		============
 
 		${text}
-	`);
+	`}`
+	);
 
 	const {data: status} = await pawoo.toot({
 		access_token: process.env.PAWOO_POKER_TOKEN,

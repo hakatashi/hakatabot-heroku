@@ -4,6 +4,8 @@
   "main": "index.js",
   "scripts": {
     "install": "wget $SHANGTEN_JS_URL -O pawoo-tenho/shangten.js",
+    "format": "prettier-eslint **/*.js --write",
+    "lint": "eslint .",
     "pawoo-tenho": "node pawoo-tenho/index.js",
     "test": "npm run test:pawoo-poker && npm run test:pawoo-tenho && npm run test:status-changer",
     "test:pawoo-poker": "mocha pawoo-poker/test",
@@ -40,8 +42,12 @@
     "xmlserializer": "^0.6.0"
   },
   "devDependencies": {
+    "@hakatashi/eslint-config": "^1.3.1",
     "chai": "^4.0.0",
+    "cson": "^5.1.0",
+    "eslint": "^4.17.0",
     "mocha": "^3.2.0",
-    "mockery": "^2.0.0"
+    "mockery": "^2.0.0",
+    "prettier-eslint-cli": "^4.7.0"
   }
 }

@@ -13,11 +13,9 @@ module.exports = (async () => {
 	const scream = (text) => {
 		const suddenDeath = new SuddenDeath(text);
 		return suddenDeath.say();
-	}
+	};
 
-	const 麻雀牌 = Array.from({length: 136}, (e, i) => (
-		String.fromCodePoint(0x1F000 + Math.floor(i / 4))
-	));
+	const 麻雀牌 = Array.from({length: 136}, (e, i) => String.fromCodePoint(0x1f000 + Math.floor(i / 4)));
 
 	const 配牌 = shuffle(麻雀牌).slice(0, 14);
 	const 向聴Number = calcShangten(配牌);
@@ -66,7 +64,15 @@ module.exports = (async () => {
 		`;
 		notification = true;
 	} else {
-		const 向聴String = ['聴牌', '一向聴', '二向聴', '三向聴', '四向聴', '五向聴', '六向聴'][向聴Number];
+		const 向聴String = [
+			'聴牌',
+			'一向聴',
+			'二向聴',
+			'三向聴',
+			'四向聴',
+			'五向聴',
+			'六向聴',
+		][向聴Number];
 
 		text = stripIndents`
 			配牌！
@@ -80,12 +86,15 @@ module.exports = (async () => {
 		}
 	}
 
-	console.log('\n' + stripIndents`
+	console.log(
+		`\n${
+			stripIndents`
 		Text to toot
 		============
 
 		${text}
-	`);
+	`}`
+	);
 
 	const png = await generateImage(配牌);
 
@@ -106,6 +115,6 @@ module.exports = (async () => {
 				${status.url}
 			`,
 			visibility: 'direct',
-		})
+		});
 	}
 })();

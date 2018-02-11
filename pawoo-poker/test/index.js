@@ -16,6 +16,7 @@ describe('pawoo-poker', () => {
 		mockery.registerMock('fh-cards', {
 			StandardDeck: class StandardDeck {
 				shuffle() {}
+
 				draws() {
 					return ['As', 'Ks', 'Qs', 'Js', 'Ts', '9s', '8s'];
 				}

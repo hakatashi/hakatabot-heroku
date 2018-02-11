@@ -26,7 +26,10 @@ module.exports = (async () => {
 		console.log(`Updating status for team ${team.name}...`);
 
 		const {emoji: customEmojis} = await slack.emoji.list();
-		const totalEmojis = [...emojis.map((e) => e.short_name), ...Object.keys(customEmojis)];
+		const totalEmojis = [
+			...emojis.map((e) => e.short_name),
+			...Object.keys(customEmojis),
+		];
 
 		const statusText = sample(tweets).replace(/\n/g, '　');
 		const statusEmoji = `:${sample(totalEmojis)}:`;
