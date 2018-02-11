@@ -1,5 +1,3 @@
-const mockery = require('mockery');
-const path = require('path');
 const {expect} = require('chai');
 
 const {is九種九牌, is十三不塔, is十三無靠} = require('../hands.js');

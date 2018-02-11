@@ -26,7 +26,7 @@ describe('status-changer', () => {
 				}
 			},
 		});
-		mockery.registerMock('download', async () => JSON.stringify(['tweet1', 'tweet2', 'tweet3']));
+		mockery.registerMock('download', () => Promise.resolve(JSON.stringify(['tweet1', 'tweet2', 'tweet3'])));
 		mockery.registerMock('emoji-data', {
 			all: () => [{short_name: 'emoji1'}, {short_name: 'emoji2'}],
 		});
@@ -51,16 +51,17 @@ describe('status-changer', () => {
 
 		const program = require('../index.js');
 
-		await new Promise((resolve, reject) => {
+		await new Promise((resolve) => {
 			callback = (property) => {
 				if (property === 'info') {
 					resolve();
 					return ticker({team: {name: 'team'}});
 				}
+				return undefined;
 			};
 		});
 
-		await new Promise((resolve, reject) => {
+		await new Promise((resolve) => {
 			callback = (property) => {
 				if (property === 'list') {
 					resolve();
@@ -70,6 +71,7 @@ describe('status-changer', () => {
 						},
 					});
 				}
+				return undefined;
 			};
 		});
 

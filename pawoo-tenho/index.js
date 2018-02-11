@@ -15,14 +15,14 @@ module.exports = (async () => {
 		return suddenDeath.say();
 	};
 
-	const 麻雀牌 = Array.from({length: 136}, (e, i) => String.fromCodePoint(0x1f000 + Math.floor(i / 4)));
+	const 麻雀牌s = Array.from({length: 136}, (e, i) => String.fromCodePoint(0x1f000 + Math.floor(i / 4)));
 
-	const 配牌 = shuffle(麻雀牌).slice(0, 14);
-	const 向聴Number = calcShangten(配牌);
+	const 配牌s = shuffle(麻雀牌s).slice(0, 14);
+	const 向聴Number = calcShangten(配牌s);
 
-	const 配牌String = `${配牌.slice(0, 13).join('')} ${配牌[13]}`;
+	const 配牌String = `${配牌s.slice(0, 13).join('')} ${配牌s[13]}`;
 
-	let text;
+	let text = null;
 	let notification = false;
 
 	if (向聴Number === -1) {
@@ -35,7 +35,7 @@ module.exports = (async () => {
 			${scream(scream('天和'))}
 		`;
 		notification = true;
-	} else if (is十三不塔(配牌)) {
+	} else if (is十三不塔(配牌s)) {
 		text = stripIndents`
 			配牌！
 			${配牌String}
@@ -45,7 +45,7 @@ module.exports = (async () => {
 			${scream(scream('十三不塔'))}
 		`;
 		notification = true;
-	} else if (is十三無靠(配牌)) {
+	} else if (is十三無靠(配牌s)) {
 		text = stripIndents`
 			配牌！
 			${配牌String}
@@ -55,7 +55,7 @@ module.exports = (async () => {
 			${scream(scream('十三無靠'))}
 		`;
 		notification = true;
-	} else if (is九種九牌(配牌)) {
+	} else if (is九種九牌(配牌s)) {
 		text = stripIndents`
 			配牌！
 			${配牌String}
@@ -96,10 +96,10 @@ module.exports = (async () => {
 	`}`
 	);
 
-	const png = await generateImage(配牌);
+	const png = await generateImage(配牌s);
 
 	const {data: status} = await pawoo.toot({
-		access_token: process.env.PAWOO_TENHO_TOKEN,
+		accessToken: process.env.PAWOO_TENHO_TOKEN,
 		status: text,
 		visibility: 'unlisted',
 		file: png,
@@ -107,7 +107,7 @@ module.exports = (async () => {
 
 	if (notification) {
 		await pawoo.toot({
-			access_token: process.env.PAWOO_TENHO_TOKEN,
+			accessToken: process.env.PAWOO_TENHO_TOKEN,
 			status: stripIndents`
 				@hakatashi
 				${text}

@@ -46,21 +46,21 @@ module.exports = (async () => {
 		`Hand cards: ${hand.cards.map((card) => cardToAbbr(card)).join(', ')}`
 	);
 
-	const completeHand = hand.cards.map((card) => cardToAbbr(card));
+	const completeHands = hand.cards.map((card) => cardToAbbr(card));
 
 	for (const card of hand.cardPool) {
-		if (completeHand.length < 5 && !completeHand.includes(cardToAbbr(card))) {
-			completeHand.push(cardToAbbr(card));
+		if (completeHands.length < 5 && !completeHands.includes(cardToAbbr(card))) {
+			completeHands.push(cardToAbbr(card));
 		}
 	}
 
-	const completeHandUnicode = completeHand
+	const completeHandsUnicode = completeHands
 		.map((card) => converter(card))
 		.join('');
 
-	console.log(`Complete Hand: ${completeHandUnicode}`);
+	console.log(`Complete Hand: ${completeHandsUnicode}`);
 
-	let japaneseName;
+	let japaneseName = null;
 	let notification = false;
 
 	if (hand.descr === 'Wild Royal Flush' || hand.descr === 'Royal Flush') {
@@ -106,7 +106,7 @@ module.exports = (async () => {
 
 		${screamer.say()}
 
-		出来役: ${completeHandUnicode}
+		出来役: ${completeHandsUnicode}
 	`;
 
 	console.log(
@@ -120,14 +120,14 @@ module.exports = (async () => {
 	);
 
 	const {data: status} = await pawoo.toot({
-		access_token: process.env.PAWOO_POKER_TOKEN,
+		accessToken: process.env.PAWOO_POKER_TOKEN,
 		status: text,
 		visibility: 'unlisted',
 	});
 
 	if (notification) {
 		await pawoo.toot({
-			access_token: process.env.PAWOO_POKER_TOKEN,
+			accessToken: process.env.PAWOO_POKER_TOKEN,
 			status: stripIndents`
 				@hakatashi
 				${text}

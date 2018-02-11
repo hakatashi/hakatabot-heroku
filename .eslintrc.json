@@ -1,7 +1,12 @@
 {
     "extends": "@hakatashi",
+    "env": {
+        "mocha": true
+    },
     "rules": {
         "no-console": "off",
+        "lines-between-class-members": "off",
+        "global-require": "off",
         "max-len": "off"
     }
 }

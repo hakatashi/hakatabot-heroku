@@ -1,13 +1,13 @@
 const Masto = require('mastodon');
 
-module.exports.toot = async ({access_token, status, visibility, file}) => {
+module.exports.toot = async ({accessToken, status, visibility, file}) => {
 	const masto = new Masto({
-		access_token,
+		access_token: accessToken,
 		api_url: 'https://pawoo.net/api/v1/',
 	});
 
 	if (!file) {
-		return await masto.post('statuses', {
+		return masto.post('statuses', {
 			status,
 			visibility,
 		});
@@ -23,7 +23,7 @@ module.exports.toot = async ({access_token, status, visibility, file}) => {
 		},
 	});
 
-	return await masto.post('statuses', {
+	return masto.post('statuses', {
 		status,
 		visibility,
 		media_ids: [response.data.id],

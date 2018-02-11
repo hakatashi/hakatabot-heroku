@@ -2,21 +2,27 @@ const mockery = require('mockery');
 const path = require('path');
 const {expect} = require('chai');
 
+const ticker = async (value) => {
+	await new Promise(process.nextTick);
+	return value;
+};
+
 describe('pawoo-poker', () => {
 	let callback = null;
 
 	before(() => {
 		mockery.registerMock('../utils/pawoo.js', {
-			toot: async (...args) => {
-				if (typeof callback === 'function') {
-					return callback(...args);
-				}
-			},
+			toot: (...args) => (
+				typeof callback === 'function'
+					? callback(...args)
+					: undefined
+			),
 		});
 		mockery.registerMock('fh-cards', {
 			StandardDeck: class StandardDeck {
-				shuffle() {}
-
+				shuffle() {
+					return undefined;
+				}
 				draws() {
 					return ['As', 'Ks', 'Qs', 'Js', 'Ts', '9s', '8s'];
 				}
@@ -42,42 +48,42 @@ describe('pawoo-poker', () => {
 		require('../index.js');
 
 		await new Promise((resolve, reject) => {
-			callback = ({access_token, status, visibility}) => {
+			callback = ({accessToken, status, visibility}) => {
 				try {
-					expect(access_token).to.equal('hoge');
+					expect(accessToken).to.equal('hoge');
 					expect(status).to.be.a('string');
 					expect(status).to.have.string('ドロー！');
 					expect(status).to.have.string('人人人');
 					expect(status).to.have.string('ロイヤルストレートフラッシュ');
 					expect(status).to.have.string('出来役');
 					expect(visibility).to.equal('unlisted');
+					resolve();
 				} catch (error) {
-					reject(error);
-					return;
+					return reject(error);
 				}
 
-				callback = ({access_token, status, visibility}) => {
-					try {
-						expect(access_token).to.equal('hoge');
-						expect(status).to.be.a('string');
-						expect(status).to.have.string('@hakatashi');
-						expect(status).to.have.string('ドロー！');
-						expect(status).to.have.string('人人人');
-						expect(status).to.have.string('ロイヤルストレートフラッシュ');
-						expect(status).to.have.string('出来役');
-						expect(status).to.have.string('https://pawoo.net/@poker/114514');
-						expect(visibility).to.equal('direct');
-					} catch (error) {
-						reject(error);
-						return;
-					}
+				return ticker({data: {url: 'https://pawoo.net/@poker/114514'}});
+			};
+		});
 
+		await new Promise((resolve, reject) => {
+			callback = ({accessToken, status, visibility}) => {
+				try {
+					expect(accessToken).to.equal('hoge');
+					expect(status).to.be.a('string');
+					expect(status).to.have.string('@hakatashi');
+					expect(status).to.have.string('ドロー！');
+					expect(status).to.have.string('人人人');
+					expect(status).to.have.string('ロイヤルストレートフラッシュ');
+					expect(status).to.have.string('出来役');
+					expect(status).to.have.string('https://pawoo.net/@poker/114514');
+					expect(visibility).to.equal('direct');
 					resolve();
+				} catch (error) {
+					return reject(error);
+				}
 
-					return {data: {url: 'https://pawoo.net/@poker/114514'}};
-				};
-
-				return {data: {url: 'https://pawoo.net/@poker/114514'}};
+				return ticker({data: {url: 'https://pawoo.net/@poker/114514'}});
 			};
 		});
 	});

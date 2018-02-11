@@ -63,6 +63,7 @@ const count搭子 = (牌s) => {
 		const sorted同種牌 = 同種牌CodePoints.sort((a, b) => a - b);
 
 		if (sorted同種牌.length !== 0) {
+			// eslint-disable-next-line no-loop-func
 			sorted同種牌.reduce((previous牌, current牌) => {
 				if (previous牌 === current牌) {
 					対子++;
