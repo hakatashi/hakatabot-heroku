@@ -16,6 +16,7 @@ module.exports = (async () => {
 
 	const tweetsBuffer = await download(process.env.TWEETS_URL);
 	const tweets = JSON.parse(tweetsBuffer);
+	const statusText = sample(tweets).replace(/\n/g, '　');
 
 	const emojis = emojiData.all();
 
@@ -31,7 +32,6 @@ module.exports = (async () => {
 			...Object.keys(customEmojis),
 		];
 
-		const statusText = sample(tweets).replace(/\n/g, '　');
 		const statusEmoji = `:${sample(totalEmojis)}:`;
 
 		await slack.users.profile.set({
