@@ -33,6 +33,7 @@ describe('status-changer', () => {
 		mockery.registerMock('emoji-data', {
 			all: () => [{short_name: 'emoji1'}, {short_name: 'emoji2'}],
 		});
+		mockery.registerMock('./get-waka.js', () => Promise.resolve('八雲立つ出雲八重垣妻ごめに八重垣作るその八重垣を'));
 	});
 
 	beforeEach(() => {
@@ -95,6 +96,7 @@ describe('status-changer', () => {
 							':emoji2:',
 							':emoji3:',
 						]);
+						expect(profile.title).to.equal('八雲立つ出雲八重垣妻ごめに八重垣作るその八重垣を');
 						resolve();
 					} catch (error) {
 						reject(error);
