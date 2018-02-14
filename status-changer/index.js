@@ -4,6 +4,8 @@ const {WebClient} = require('@slack/client');
 const emojiData = require('emoji-data');
 const sample = require('lodash/sample');
 
+const getWaka = require('./get-waka.js');
+
 if (require.main === module) {
 	dotenv.config();
 }
@@ -34,13 +36,17 @@ module.exports = (async () => {
 
 		const statusEmoji = `:${sample(totalEmojis)}:`;
 
+		const waka = await getWaka();
+
 		await slack.users.profile.set({
 			profile: JSON.stringify({
+				title: waka,
 				status_text: statusText,
 				status_emoji: statusEmoji,
 			}),
 		});
 
 		console.log(`New status: ${statusEmoji} ${statusText}`);
+		console.log(`New title: ${waka}`);
 	}
 })();
