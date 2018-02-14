@@ -96,7 +96,9 @@ describe('status-changer', () => {
 							':emoji2:',
 							':emoji3:',
 						]);
-						expect(profile.title).to.equal('八雲立つ出雲八重垣妻ごめに八重垣作るその八重垣を');
+						expect(profile.title).to.equal(
+							'八雲立つ出雲八重垣妻ごめに八重垣作るその八重垣を'
+						);
 						resolve();
 					} catch (error) {
 						reject(error);

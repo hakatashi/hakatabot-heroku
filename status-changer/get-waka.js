@@ -22,7 +22,10 @@ const getBody = async (title) => {
 	})}`;
 
 	const content = await download(url);
-	const body = get(Object.values(get(JSON.parse(content), ['query', 'pages'])), [0, 'revisions', 0, '*']);
+	const body = get(
+		Object.values(get(JSON.parse(content), ['query', 'pages'])),
+		[0, 'revisions', 0, '*']
+	);
 
 	return body;
 };
@@ -81,7 +84,10 @@ module.exports = async () => {
 	}
 
 	const waka = sample(wakas);
-	return `${waka.text}──${waka.author}\u3000『${pages[page]}』${title.replace(/([歌\s一二三四五六七八九]|（.+?）)/g, '')}・${parseInt(waka.number)}`;
+	return `${waka.text}──${waka.author}\u3000『${pages[page]}』${title.replace(
+		/([歌\s一二三四五六七八九]|（.+?）)/g,
+		''
+	)}・${parseInt(waka.number)}`;
 };
 
 if (require.main === module) {
