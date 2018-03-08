@@ -19,7 +19,7 @@
   "author": "Koki Takahashi <hakatasiloving@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@slack/client": "^3.16.0",
+    "@slack/client": "^4.0.0",
     "ab-pokersolver": "^2.1.3",
     "array-unique": "^0.3.2",
     "common-tags": "^1.4.0",
