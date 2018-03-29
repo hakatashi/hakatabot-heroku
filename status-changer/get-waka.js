@@ -55,6 +55,7 @@ module.exports = async () => {
 	let number = null;
 	let author = null;
 	let text = null;
+	let results = null;
 
 	const wakas = [];
 
@@ -65,8 +66,8 @@ module.exports = async () => {
 			continue;
 		}
 
-		if (line.match(/^\d+$/)) {
-			number = line;
+		if ((results = line.match(/\d+/))) {
+			number = results[0];
 			author = null;
 			text = null;
 		} else if (line.length > 15) {
