@@ -13,7 +13,7 @@
     "test:status-changer": "mocha status-changer/test"
   },
   "engines": {
-    "node": "^9.4.0"
+    "node": "^10.3.0"
   },
   "repository": "https://github.com/hakatashi/hakatabot-heroku.git",
   "author": "Koki Takahashi <hakatasiloving@gmail.com>",
