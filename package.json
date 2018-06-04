@@ -32,7 +32,6 @@
     "jsdom": "^11.11.0",
     "lodash": "^4.17.10",
     "mastodon": "^1.2.2",
-    "open": "^0.0.5",
     "request": "^2.87.0",
     "shuffle-array": "^1.0.1",
     "snapsvg": "^0.5.1",
