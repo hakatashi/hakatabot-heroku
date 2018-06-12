@@ -37,6 +37,7 @@
     "snapsvg": "^0.5.1",
     "sudden-death": "^0.1.1",
     "svg2png": "^4.1.1",
+    "unicode-11.0.0": "^0.7.7",
     "unicode-playing-card-converter": "^1.2.0",
     "xmlserializer": "^0.6.1"
   },
