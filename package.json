@@ -29,7 +29,7 @@
     "emoji-data": "^0.2.0",
     "fh-cards": "^1.1.2",
     "jquery-extend": "^2.0.3",
-    "jsdom": "^11.11.0",
+    "jsdom": "^12.0.0",
     "lodash": "^4.17.10",
     "mastodon": "^1.2.2",
     "request": "^2.87.0",
