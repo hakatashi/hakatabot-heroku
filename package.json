@@ -10,7 +10,9 @@
     "test": "mocha \"./{,!(node_modules)/**/}/test\"",
     "test:pawoo-poker": "mocha pawoo-poker/test",
     "test:pawoo-tenho": "mocha pawoo-tenho/test",
-    "test:status-changer": "mocha status-changer/test"
+    "test:status-changer": "mocha status-changer/test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": "^10.3.0"
@@ -39,7 +41,8 @@
     "svg2png": "^4.1.1",
     "unicode-11.0.0": "^0.7.7",
     "unicode-playing-card-converter": "^1.2.0",
-    "xmlserializer": "^0.6.1"
+    "xmlserializer": "^0.6.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@hakatashi/eslint-config": "^1.4.0",
@@ -48,5 +51,6 @@
     "mocha": "^6.0.0",
     "mockery": "^2.1.0",
     "prettier-eslint-cli": "^4.7.1"
-  }
+  },
+  "snyk": true
 }
