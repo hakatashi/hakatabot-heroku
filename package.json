@@ -25,7 +25,7 @@
     "common-tags": "^1.8.0",
     "datauri": "^1.1.0",
     "dotenv": "^7.0.0",
-    "download": "^7.0.0",
+    "download": "^7.1.0",
     "emoji-data": "^0.2.0",
     "fh-cards": "^1.1.2",
     "jquery-extend": "^2.0.3",
