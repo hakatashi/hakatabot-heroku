@@ -32,7 +32,7 @@
     "jsdom": "^11.11.0",
     "lodash": "^4.17.20",
     "mastodon": "^1.2.2",
-    "request": "^2.87.0",
+    "request": "^2.88.2",
     "shuffle-array": "^1.0.1",
     "snapsvg": "^0.5.1",
     "sudden-death": "^0.1.1",
