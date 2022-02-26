@@ -9,8 +9,7 @@
     "pawoo-tenho": "node pawoo-tenho/index.js",
     "test": "mocha \"./{,!(node_modules)/**/}/test\"",
     "test:pawoo-poker": "mocha pawoo-poker/test",
-    "test:pawoo-tenho": "mocha pawoo-tenho/test",
-    "test:status-changer": "mocha status-changer/test"
+    "test:pawoo-tenho": "mocha pawoo-tenho/test"
   },
   "engines": {
     "node": "^10.3.0"
